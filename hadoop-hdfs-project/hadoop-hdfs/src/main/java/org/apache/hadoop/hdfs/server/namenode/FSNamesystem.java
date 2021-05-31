@@ -6032,7 +6032,8 @@ public class FSNamesystem implements Namesystem, FSNamesystemMBean,
           .put("blockPoolUsedPercent", node.getBlockPoolUsedPercent())
           .put("volfails", node.getVolumeFailures())
           // Block report time in minutes
-          .put("lastBlockReport", getLastBlockReport(node));
+          .put("lastBlockReport", getLastBlockReport(node))
+          .put("rack", node.getNetworkLocation());
       VolumeFailureSummary volumeFailureSummary = node.getVolumeFailureSummary();
       if (volumeFailureSummary != null) {
         innerinfo
@@ -6067,6 +6068,7 @@ public class FSNamesystem implements Namesystem, FSNamesystemMBean,
           .put("decommissioned", node.isDecommissioned())
           .put("adminState", node.getAdminState().toString())
           .put("xferaddr", node.getXferAddr())
+          .put("rack", node.getNetworkLocation())
           .build();
       info.put(node.getHostName() + ":" + node.getXferPort(), innerinfo);
     }
